@@ -36,3 +36,4 @@ stdin -> input channel -> |-> worker 2 ->|-> output channel -> stdout
   is 10000. Any overflow will terminate the program immaturely. An elastic buffer can solve the issue.
 * The program will eventually terminate if it encounters EOF input.
 * The output does not contain any space, since it's compacted JSON.
+* Sure more granular tests can be added to increase the coverage.

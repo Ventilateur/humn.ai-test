@@ -11,6 +11,8 @@ import (
 	"humn.ai/phan/models"
 )
 
+// Read reads from io.Reader (which can be os.Stdin) line by line, unmarshal lines into models.Input objects and
+// push them to a buffered channel. Read terminates when EOF is reached.
 func Read(r io.Reader, buf chan models.Input) {
 	defer close(buf)
 	scanner := bufio.NewScanner(r)
@@ -34,6 +36,8 @@ func Read(r io.Reader, buf chan models.Input) {
 	}
 }
 
+// Write reads models.Output objects from a buffered channel, marshals them into strings of compact JSON, then
+// writes to an io.Writer (which can be os.Stdout). Write terminates when the channel is closed.
 func Write(w io.Writer, buf chan models.Output, finished chan bool) {
 	for out := range buf {
 		raw, err := json.Marshal(&out)
